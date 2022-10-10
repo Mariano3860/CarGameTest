@@ -37,10 +37,12 @@ public class Game {
             int lastCol = currentCol;
             int pos;
 
-            //chequear vecinos y anotarlo en mapeado
-            //Si hay un vecino 2, agregarlo a la matriz mapeado
+            //Chequear si hay vecinos (der, iz, arr, abajo) con "2" y anotarlo en mapeado
             //Cambiar mapa de badpositions por la matriz mapeado
-            //
+            //Pedir random move y chequear que no haya "2" mapeados, si hay "2", pedir nuevas posiciones
+            //Mapeado es igual al tablero real? => descubrio el mapa entero
+            //Despueas de 999 movimientos mapeado!=tablero => No pudo descubrir el mapa entero
+            //Life<0 => Murio el auto
 
             this.moveCar(currentRow,currentCol);
             pos = tablero.getTablero()[currentRow][currentCol];

@@ -19,6 +19,14 @@ public class Game {
         life = 10;
         tablero = new Tablero(tableroRow, tableroCol, 10, 5);
         mapeado = new int[tableroRow][tableroCol];
+        //Inicializar Mapeado con todas las posiciones distintas a 0,1,2 para saber por donde va pasando el auto
+        //A medida que lo recorre, lo transforma en 0, 1 y 2.
+        //Por ahora lo inicializo en -1 exepto que haya algo mas eficiente
+        for(int i=0;i<mapeado.length;i++){
+            for(int j=0;j<mapeado[i].length;j++) {
+                mapeado[i][j]= -1;
+            }
+        }
 
         //Entregar posiciones iniciales vacias
         currentRow = (int) (Math.random() * tableroRow);
@@ -37,12 +45,13 @@ public class Game {
             int lastCol = currentCol;
             int pos;
 
-            //Chequear si hay vecinos (der, iz, arr, abajo) con "2" y anotarlo en mapeado
+            //Chequear los 4 lugares a los costados (der, iz, arr, abajo), si ">0", buscar en Tablero si es "2", si es "2" anotarlo en mapeado
             //Cambiar mapa de badpositions por la matriz mapeado
-            //Pedir random move y chequear que no haya "2" mapeados, si hay "2", pedir nuevas posiciones
-            //Mapeado es igual al tablero real? => descubrio el mapa entero
-            //Despueas de 999 movimientos mapeado!=tablero => No pudo descubrir el mapa entero
+            //Pedir random move y chequear que no haya "1" o "2" mapeados, si hay, pedir nuevas posiciones
+            //Mapeado es igual al tablero real? => "Descubrio el mapa entero"
+            //Despues de 999 movimientos si mapeado!=tablero => No pudo descubrir el mapa entero
             //Life<0 => Murio el auto
+            //Opcional: Buscar una funcion mas eficiente para chequear si mapeado!=tablero
 
             this.moveCar(currentRow,currentCol);
             pos = tablero.getTablero()[currentRow][currentCol];
@@ -52,6 +61,8 @@ public class Game {
                     break;
                 case 1:
                     car.addBadPosition(currentRow, currentCol);
+                    car.decreaseLife();
+                    //Agregar a la matriz mapear la posicion con 1
                     currentRow = lastRow;
                     currentCol = lastCol;
                     break;

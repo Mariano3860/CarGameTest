@@ -34,6 +34,7 @@ public class Game {
             currentRow = (int) (Math.random() * tableroRow);
             currentCol = (int) (Math.random() * tableroCol);
         }
+
         //Renderizar el tablero+auto inicial
         tablero.renderTablero(currentRow, currentCol);
 

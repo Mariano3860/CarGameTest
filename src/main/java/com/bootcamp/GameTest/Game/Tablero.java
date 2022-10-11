@@ -36,14 +36,16 @@ public class Tablero {
     }
 
     public boolean availablePosition(int row, int col){
+        if (row-1 <0){
+            row = tablero.length-1;
+        }
+        if (col-1 <0){
+            col = tablero[row].length-1;
+        }
         if (tablero[row][col]==1){
             return false;
         } else if (tablero[row][col]==2){
             return false;
-        } else if (row-1 <0){
-            row = tablero.length-1;
-        } else if (col-1 <0){
-            col = tablero[row].length-1;
         } else if (tablero[row-1][col]==2 && tablero[row][col-1]==2 && tablero[row][col+1]==2 && tablero[row+1][col]==2) {
             return false;
         }
